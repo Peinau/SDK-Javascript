@@ -12,7 +12,7 @@ your changes into our code. Ideas and other comments are also welcome.
 $ git clone git@github.com:me/peinau-javascript.git
 
 # Change directory
-$ cd paypal-javascript
+$ cd peinau-javascript
 
 # Add the upstream repo
 $ git remote add upstream git@github.com:peinau/peinau-javascript.git
