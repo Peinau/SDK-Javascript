@@ -13,7 +13,7 @@ The way this works is:
 
 ### How to integrate with the REST API
 
-1. Go to [developer.Peinau.com/developer/applications](https://developer.Peinau.com/developer/applications) and create a **REST API app**, then note down your client id and secret
+1. Go to [Dev Portal / Applications](https://developer.Peinau.com/developer/applications) and create a **REST API app**, then note down your client id and secret
 
 2. Call `api.Peinau.com/v1/oauth2/token` to get a temporary access token
 
