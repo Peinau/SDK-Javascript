@@ -67,6 +67,7 @@ You'll need:
             /* Go to a success page */
         },
 
+        // Pass a function to be called when the gateway (or an internal error) reject the payment
         onError: function(data) {
 
             console.log('The payment was reject!');
@@ -82,7 +83,7 @@ You'll need:
         }
 
          // Pass a function to be called when component send a log info
-        onLog: function(data) {
+        onLog: function(data) { 
 
             console.log('Message Log = ', data);
         }
@@ -106,7 +107,7 @@ Peinau.Button.render({
 
     style: {
         size:   'medium', // tiny, small, medium
-        color:  'orange', // orange, blue, silver
+        color:  'green', // green, blue, white
         shape:  'pill'    // pill, rect
     }
 
