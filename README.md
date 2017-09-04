@@ -10,7 +10,7 @@ Peinau Checkout
 
 - Do you want a button which gives you **finely grained control** over your transaction; creating and finalizing transactions from your server
   side using Peinau's REST api? If so you should use the [**Advanced Javascript Integration**](https://github.com/Peinau/Peinau-checkout/tree/master/docs/button.md#advanced-integration), which will allow you to create
-  and finalize the transaction yourself on your server side using the [Peinau Payments REST API](https://developer.Peinau.com/docs/api/payments/).
+  and finalize the transaction yourself on your server side using the [Peinau Payments REST API](./articles/rest-api/introduction.md).
 
 - Do you use **Shopify, Vtex or Ember.js** to render your e-commerce? If so, you should use the [**Shopify, Vtex or Ember.js Elements**](https://github.com/Peinau/peinau-vtex),
   which provide native support for each of these frameworks, so you can drop Peinau Buttons in any of your front-end views.
@@ -36,9 +36,9 @@ This component renders a Peinau button onto your page, which will take care of o
 
 ## Integrating with the Peinau REST API
 
-If you want to use the advanced javascript integrations, you will need a way to create payment tokens on your server side. The simplest way to do this is using the [Peinau Payments REST API](https://github.com/Peinau/peinau-dev-portal/articles/product-checkout)
+If you want to use the advanced javascript integrations, you will need a way to create payment tokens on your server side. The simplest way to do this is using the [Peinau Payments REST API](./articles/rest-api/introduction.md)
 
-### [Integrating with the Peinau REST API](https://github.com/Peinau/peinau-dev-portal/articles/product-checkout/introduction.md)
+### [Integrating with the Peinau REST API](./articles/rest-api/introduction.md))
 
 -----
 
