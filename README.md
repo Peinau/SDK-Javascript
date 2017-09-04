@@ -26,6 +26,7 @@ Peinau Checkout
 
 ## [Peinau Checkout Button](articles/sdk-button/introduction.md)
 
+![Peinau Checkout](./images/articles/sdk-checkout-0.png)
 
 This component renders a Peinau button onto your page, which will take care of opening up Peinau for you and guiding your customer through the payment process. After the payment is complete, we will notify you using a javascript callback, and you can take your customer to a success page.
 
@@ -43,7 +44,7 @@ If you want to use the advanced javascript integrations, you will need a way to 
 
 ## Development
 
-Please feel free to follow the [Contribution Guidelines](./CONTRIBUTING.md) to contribute to this repository. PRs are welcome, but for major changes please raise an issue first.
+Please feel free to follow the [Contribution Guidelines](./articles/CONTRIBUTING.md) to contribute to this repository. PRs are welcome, but for major changes please raise an issue first.
 
 
 ### Debugging messages
