@@ -24,21 +24,18 @@ Peinau Checkout
    ```
 
 
-## [Peinau Checkout Button](https://github.com/Peinau/peinau-javascript)
+## [Peinau Checkout Button](articles/sdk-button/introduction.md)
 
 
-This component renders a Peinau button onto your page, which will take care of opening up Peinau for you and guiding
-your customer through the payment process. After the payment is complete, we will notify you using a javascript callback,
-and you can take your customer to a success page.
+This component renders a Peinau button onto your page, which will take care of opening up Peinau for you and guiding your customer through the payment process. After the payment is complete, we will notify you using a javascript callback, and you can take your customer to a success page.
 
-[Integrate the button component](https://github.com/Peinau/peinau-javascript/articles/checkout/integration.md)
+[Integrate the button component](articles/sdk-button/introduction.md)
 
 -----
 
 ## Integrating with the Peinau REST API
 
-If you want to use the advanced javascript integrations, you will need a way to create payment tokens on your
-server side. The simplest way to do this is using the [Peinau Payments REST API](https://github.com/Peinau/peinau-dev-portal/articles/product-checkout)
+If you want to use the advanced javascript integrations, you will need a way to create payment tokens on your server side. The simplest way to do this is using the [Peinau Payments REST API](https://github.com/Peinau/peinau-dev-portal/articles/product-checkout)
 
 ### [Integrating with the Peinau REST API](https://github.com/Peinau/peinau-dev-portal/articles/product-checkout/introduction.md)
 
