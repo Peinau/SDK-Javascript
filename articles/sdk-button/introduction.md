@@ -1,8 +1,8 @@
 ## Peinau Checkout Button
 
-![Peinau Button](./images/sdk-button-1.png)
+![Peinau Button](./images/sdk-button-0.png)
 
-![Peinau Checkout](./images/sdk-checkout-1.png)
+![Peinau Checkout](./images/sdk-checkout-0.png)
 
 ### Before you start
 
