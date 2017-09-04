@@ -38,7 +38,7 @@ This component renders a Peinau button onto your page, which will take care of o
 
 If you want to use the advanced javascript integrations, you will need a way to create payment tokens on your server side. The simplest way to do this is using the [Peinau Payments REST API](./articles/rest-api/introduction.md)
 
-### [Integrating with the Peinau REST API](./articles/rest-api/introduction.md))
+### [Integrating with the Peinau REST API](./articles/rest-api/introduction.md)
 
 -----
 

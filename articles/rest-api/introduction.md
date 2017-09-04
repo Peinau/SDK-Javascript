@@ -140,17 +140,11 @@ The way this works is:
            return new Peinau.Promise(function(resolve, reject) {
 
                // Call your server side to get the Payment ID from step 3, then pass it to the resolve callback
-
                http.post('https://www.my-Peinau-store.com/my-api/payment-create')
                    .done(function(data) {
                        resolve(data.paymentID);
                    });
            });
-       },
-
-       onAuthorize: function(data) {
-
-           // Call payment execute (see step 5)
        }
 
    }, '#my-button-element');
