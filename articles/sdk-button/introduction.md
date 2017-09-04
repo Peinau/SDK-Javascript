@@ -57,30 +57,34 @@ You'll need:
             });
         },
 
-        // Pass a function to be called when the customer approves the payment,
-        // then call execute payment on your server:
+        // Pass a function to be called when the customer approves the payment
+        onSuccess: function(data) {
 
-        onAuthorize: function(data) {
-
-            console.log('The payment was authorized!');
+            console.log('The payment was success!');
             console.log('Payment ID = ',   data.paymentID);
             console.log('PayerID = ', data.payerID);
 
-            // At this point, the payment has been authorized.
-            if(data.paymentSuccess){
-                /* Go to a success page */
-            }else{
-                /* Go to an error page  */
-            }
+            /* Go to a success page */
+        },
 
+        onError: function(data) {
+
+            console.log('The payment was reject!');
+
+            /* Go to a error page */
         },
 
         // Pass a function to be called when the customer cancels the payment
-
         onCancel: function(data) {
 
-            console.log('The payment was cancelled!');
+            console.log('The payment was manually canceled!');
             console.log('Payment ID = ', data.paymentID);
+        }
+
+         // Pass a function to be called when component send a log info
+        onLog: function(data) {
+
+            console.log('Message Log = ', data);
         }
 
     }, '#my-button-element');

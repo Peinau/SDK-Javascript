@@ -1,7 +1,14 @@
 'use strict';
 
 export default class CheckoutButton {
-	render(x : number, y : number) : number {
-		return (x + y);
+	render(
+		payment: Promise<String>,
+		onSuccess: Function,
+		onError: Function,
+		onCancel: Function,
+		onLog: Function,
+	) {
+
+
 	}
 }

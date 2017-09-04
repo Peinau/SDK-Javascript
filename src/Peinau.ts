@@ -2,6 +2,6 @@ import CheckoutButton from './checkout/button';
 
 'use strict';
 
-export class Peinau {
-	Button: CheckoutButton
+export default {
+	Button: (new CheckoutButton())
 }
