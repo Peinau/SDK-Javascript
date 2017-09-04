@@ -26,7 +26,7 @@ This integration lets you specify all of your payment parameters all at once, to
 
 
 With this integration:
-- We set up the `payment` method to call our web-server, which then calls the Peinau REST API to **create** a Payment ID.
+- We set up the `payment` method to call our web-server, which then calls the [Peinau REST API](./../rest-api/introduction.md) to **create** a Payment ID.
 - We listen for `onAuthorize`, wich indicates if the payments was success or rejected by the gateway
 
 You'll need:
