@@ -2,7 +2,7 @@
 
 ![Peinau Button](./images/button.png)
 
-![Peinau Checkout](./images/checkout.png)
+![Peinau Checkout](./images/sdk-button-1.png)
 
 ### Before you start
 
