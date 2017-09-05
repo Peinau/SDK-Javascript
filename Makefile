@@ -10,3 +10,5 @@ me-happy:
 
 compile:
 	npm run rebuild
+	cp dist/peinau.min.js dist/peinau.js
+	webpack -p #minified

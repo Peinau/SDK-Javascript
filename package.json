@@ -6,6 +6,7 @@
   "scripts": {
     "build": "webpack",
     "rebuild": "rimraf dist && webpack",
+    "minimize": "webpack --minimize",
     "clean": "rimraf dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -29,7 +30,6 @@
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
     "rimraf": "^2.6.1",
     "ts-loader": "^2.3.4",
     "typescript": "^2.5.2",

@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
@@ -7,7 +8,7 @@ module.exports = {
     },
     output: {
         path: __dirname,
-        filename: './dist/index.js',
+        filename: './dist/peinau.min.js',
         library: 'Peinau'
     },
     module: {
@@ -20,5 +21,6 @@ module.exports = {
             loaders: ['babel-loader', 'ts-loader'],
             exclude: /node_modules/
         }]
-    }
+    },
+    plugins: []
 };
