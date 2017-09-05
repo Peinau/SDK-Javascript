@@ -1,28 +1,38 @@
 {
-  "name": "node-typescript-seed",
-  "version": "0.0.1",
-  "description": "A simple Node/TypeScript seed with watch support.",
-  "main": "src/app/app.ts",
+  "name": "peinau-sdk-javascript",
+  "version": "1.0.0",
+  "description": "Peinau SDK Javascript",
+  "main": "dist/peinau.js",
   "scripts": {
-    "clean": "rimraf build",
-    "prebuild": "npm run clean",
-    "build": "tsc",
-    "prestart": "npm run build",
-    "start": "node ./build/app/app.js",
-    "predev": "npm run clean",
-    "dev": "concurrently \"npm run tsc-watch\" \"npm run nodemon\""
+    "build": "webpack",
+    "rebuild": "rimraf dist && webpack",
+    "clean": "rimraf dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "David Muñoz <dmunozgaete@gmail.com>",
+  "author": {
+    "name": "David Antonio Muñoz Gaete",
+    "email": "dmunozgaete@gmail.com",
+    "url": "https://github.com/dmunozgaete"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Peinau/peinau-javascript"
+  },
+  "keywords": [
+    "typescript",
+    "Peinau",
+    "SDK"
+  ],
   "license": "MIT",
-  "dependencies": {
-    
-  },
   "devDependencies": {
-    "concurrently": "^3.1.0",
-    "nodemon": "^1.11.0",
-    "rimraf": "^2.5.4",
-    "tslint": "^3.15.1",
-    "typescript": "^2.0.3",
-    "wait-on": "^1.5.3"
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "rimraf": "^2.6.1",
+    "ts-loader": "^2.3.4",
+    "typescript": "^2.5.2",
+    "webpack": "^3.5.5"
   }
 }
