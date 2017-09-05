@@ -39,7 +39,7 @@ You'll need:
 
 <script>
 
-    Peinau.Button.render({
+    Peinau.CheckoutButton.render({
 
         // Set up a getter to create a Payment ID using the payments api, on your server side:
         payment: function() {
@@ -97,7 +97,7 @@ You'll need:
 You can change the look and feel of the button, using the `style` parameter, and language of the button using `locale` parameter:
 
 ```javascript
-Peinau.Button.render({
+Peinau.CheckoutButton.render({
 
     ...
     // Specify the language displayed on your button

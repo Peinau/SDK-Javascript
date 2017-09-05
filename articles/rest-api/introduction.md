@@ -113,11 +113,6 @@ The way this works is:
          "href": "https://api.Peinau.com/v1/payments/payment/INPA-0J356327TH335450NK56Y2PQ/pay",
          "rel": "approval_url",
          "method": "REDIRECT"
-       },
-       {
-         "href": "https://api.Peinau.com/v1/payments/payment/INPA-0J356327TH335450NK56Y2PQ/execute",
-         "rel": "execute",
-         "method": "POST"
        }
      ]
    }
@@ -125,7 +120,7 @@ The way this works is:
 
    Here you can see that the `id` is `INPA-0J356327TH335450NK56Y2PQ`. This is the id we need to pass back to use on our front-end.
 
-4. Use the `Peinau.Button` component to let the buyer authorize the payment
+4. Use the `Peinau.CheckoutButton` component to let the buyer authorize the payment
 
    You'll need:
 
@@ -134,7 +129,7 @@ The way this works is:
    ---
 
    ```javascript
-   Peinau.Button.render({
+   Peinau.CheckoutButton.render({
 
        payment: function() {
            return new Peinau.Promise(function(resolve, reject) {
