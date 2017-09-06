@@ -36,10 +36,14 @@ class CheckoutButton {
 
 							Utils.Events.bind(elm, "click", (evt) => {
 
+								elm.innerHTML = "Generando Pago...";
+
 								settings
 									.payment(paymentMethod)
 									.then((paymentId) => {
-										alert(paymentMethod);
+										
+										elm.innerHTML = paymentMethod;
+										
 										console.log("CALLBACK!!", paymentId)
 										console.log(this);
 									})

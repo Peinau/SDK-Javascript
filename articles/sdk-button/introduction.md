@@ -35,26 +35,24 @@ You'll need:
 - An **HTML Container Element** to render the button into
 
 ```javascript
-<div id="my-button-element"></div>
+<button id="my-qpay-credit-button" data-payment-method="QUICKPAY_CREDIT">
+</button>
 
 <script>
 
-    Peinau.Components.CheckoutButton.render({
+    Peinau.Components.Button.render({
 
         // Set up a getter to create a Payment ID using the payments api, on your server side:
         payment: function() {
-            return new Peinau.Promise(function(resolve, reject) {
+            var defer = new Peinau.Deferred();
+            // Make an ajax call to get the Payment ID. This should call your back-end,
+            // which should invoke the Peinau Payment Create api to retrieve the Payment ID.
 
-                // Make an ajax call to get the Payment ID. This should call your back-end,
-                // which should invoke the Peinau Payment Create api to retrieve the Payment ID.
-
-                // When you have a Payment ID, you need to call the `resolve` method, e.g `resolve(data.paymentID)`
-                // Or, if you have an error from your server side, you need to call `reject`, e.g. `reject(err)`
-
-                http.post('/your-api/create-payment')
-                    .done(function(data) { resolve(data.paymentID); })
-                    .fail(function(err)  { reject(err); });
-            });
+            // When you have a Payment ID, you need to call the `resolve` method, e.g `resolve(data.paymentID)`
+            // Or, if you have an error from your server side, you need to call `reject`, e.g. `reject(err)`
+            http.post('/your-api/create-payment')
+                .done(function(data) { defer.resolve(data.paymentID); })
+                .fail(function(err)  { defer.reject(err); });            
         },
 
         // Pass a function to be called when the customer approves the payment
@@ -88,7 +86,7 @@ You'll need:
             console.log('Message Log = ', data);
         }
 
-    }, '#my-button-element');
+    }, '#my-qpay-credit-button');
 </script>
 ```
 
