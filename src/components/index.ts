@@ -1,1 +1,1 @@
-export { CheckoutButton } from './checkout/Button';
+export { Button } from './checkout/Button';

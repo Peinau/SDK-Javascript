@@ -4,9 +4,9 @@ class DOMUtils {
     * DOM Traversal (Sizzle)
     *
     * @param {string} selector Selector to find 
-    * @return {HTMLElement} return the finded DOM element
+    * @return {Element} return the finded DOM element
     */
-    findBySelector(selector: string): any {
+    findBySelector(selector: string): Element {
         return document.querySelector(selector);
     };
 
@@ -14,30 +14,30 @@ class DOMUtils {
      * DOM Traversal (Sizzle)
      *
      * @param {string} selector Selector to find 
-     * @return {HTMLElement} return the collection of DOM elements
+     * @return {NodeListOf<Element>} return the collection of DOM elements
      */
-    findAllBySelector(selector: string) {
+    findAllBySelector(selector: string): NodeListOf<Element> {
         return document.querySelectorAll(selector);
     };
 
     /**
      * DOM Traversal (Sizzle)
      *
-     * @param {HTMLElement} elm Element to search in his parent's
-     * @param {string} selector Selector to find 
-     * @return {HTMLElement} return the finded DOM element
+     * @param elm Element to search in his parent's
+     * @param selector Selector to find 
+     * @return return the finded DOM element
      */
-    findParent(elm: HTMLElement, selector: string) {
+    findParent(elm: HTMLElement, selector: string): Element {
         return elm.closest(selector);
     };
 
     /**
      * DOM Traversal (Sizzle)
-         *
+     *
      * @param {string} id id element to find 
      * @return {HTMLElement} return the finded DOM element
      */
-    findById(id: string) {
+    findById(id: string): HTMLElement {
         return document.getElementById(id);
     };
 
@@ -47,7 +47,7 @@ class DOMUtils {
      * @param {HTMLElement} elm Element to add the classname
      * @param {string} classNameToAdd Class Name to Add
      */
-    addClass(elm: HTMLElement, classNameToAdd: string) {
+    addClass(elm: HTMLElement, classNameToAdd: string): void {
         elm.className += ' ' + classNameToAdd;
     }
 
@@ -57,7 +57,7 @@ class DOMUtils {
      * @param {HTMLElement} elm Element to remove the classname
      * @param {string} classNameToAdd Class Name to Remove
      */
-    removeClass(elm: HTMLElement, classNameToRemove: string) {
+    removeClass(elm: HTMLElement, classNameToRemove: string): void {
         var elClass = ' ' + elm.className + ' ';
         while (elClass.indexOf(' ' + classNameToRemove + ' ') !== -1) {
             elClass = elClass.replace(' ' + classNameToRemove + ' ', '');

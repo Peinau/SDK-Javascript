@@ -39,7 +39,7 @@ You'll need:
 
 <script>
 
-    Peinau.CheckoutButton.render({
+    Peinau.Components.CheckoutButton.render({
 
         // Set up a getter to create a Payment ID using the payments api, on your server side:
         payment: function() {

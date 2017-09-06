@@ -2,15 +2,33 @@
 
 <head>
     <title>Demo</title>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.5/require.min.js"></script>
-    <script type="text/javascript" src="../dist/index.js"></script>
+    <script type="text/javascript" src="../dist/peinau.min.js"></script>
 </head>
 
 <body>
 
-    <button id="my-button-element">
-        PAGAR CON PEINAU
+    <button id="my-webpay-button" data-payment-method="TRANSBANK_WEBPAY">
+    </button>
+
+    <button id="my-qpay-credit-button" data-payment-method="QUICKPAY_CREDIT">
     </button>
 </body>
+
+<script type="text/javascript">
+    Peinau.Components.Button.render({
+        payment: function (paymentMethod) {
+            var defer = new Peinau.Deferred();
+
+            setTimeout(function () {
+                defer.resolve("DDD");
+            }, 2000);
+
+            return defer;
+        }
+    }, [
+        '#my-webpay-button',
+        '#my-qpay-credit-button',
+    ]);
+</script>
 
 </html>

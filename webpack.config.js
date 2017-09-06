@@ -22,5 +22,9 @@ module.exports = {
             exclude: /node_modules/
         }]
     },
-    plugins: []
+    plugins: [
+        new webpack.LoaderOptionsPlugin({
+            debug: true
+        })
+    ]
 };

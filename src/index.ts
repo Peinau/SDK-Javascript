@@ -1,12 +1,9 @@
 import * as Components from './components';
 import * as Utils from './utils';
-
-
-//export default {};
-//export const Components = components;
-//export const Utils = utils;
+import { Deferred } from "./Deferred";
 
 export {
     Components,
-    Utils
-}
+    Utils,
+    Deferred
+} 
