@@ -51,8 +51,9 @@ class ExpressCheckoutRenderer {
             })();
 
             const fn = (e) => {
-
-                if (!finaly) {
+                // tslint:disable-next-line:no-debugger
+                debugger;
+                if (!finaly && e.origin.indexOf(host_to_match.url) === 0) {
                     finaly = true;
 
                     if (removeEvent) {
@@ -75,10 +76,15 @@ class ExpressCheckoutRenderer {
                     opener.postMessage({
                         type: 'command',
                         value: 'close'
-                    }, '*');
+                    }, host_to_match.url);
+                   // commander.execute('command', 'close', []);
+
                 }
             };
             const removeEvent = utils.events.bind(window, 'message', fn);
+
+           // const commander = Peinau.sdk.channel.commander.connect(host_to_match.url);
+           // commnader.disconnect();
 
             //console.log(intention);
             //console.log($this);
