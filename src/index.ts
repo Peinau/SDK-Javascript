@@ -1,9 +1,9 @@
-import * as Components from './components';
-import * as Utils from './utils';
-import { Deferred } from "./Deferred";
+import * as components from './components';
+import * as utils from './utils';
+import * as sdk from './api/sdk';
 
 export {
-    Components,
-    Utils,
-    Deferred
-} 
+    components,
+    utils,
+    sdk
+};

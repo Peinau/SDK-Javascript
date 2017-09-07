@@ -1,3 +1,3 @@
-export { Events } from './Events';
-export { DOM } from './DOM';
-export { Ext } from './Ext';
+export { events } from './Events';
+export { dom } from './DOM';
+export { ext } from './Ext';

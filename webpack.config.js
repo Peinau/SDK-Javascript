@@ -5,6 +5,9 @@ module.exports = {
     entry: ['babel-polyfill', './src/'],
     resolve: {
         extensions: ['.js', '.ts'],
+        alias: {
+            joi: 'joi-browser'
+        }
     },
     output: {
         path: __dirname,
@@ -19,7 +22,9 @@ module.exports = {
         loaders: [{
             test: /\.ts$/,
             loaders: ['babel-loader', 'ts-loader'],
-            exclude: /node_modules/
+            exclude: [
+                /node_modules/
+            ]
         }]
     },
     plugins: [

@@ -1,69 +1,75 @@
-import { CheckoutButtonRenderSettings, PaymentCallback } from "./CheckoutButtonRenderSettings";
-import { Utils } from "../../index";
+import { renderSettingsSchema } from './RenderSettingsSchema';
+import * as Joi from 'joi';
+import { utils } from '../../index';
+import { paymentIntentionSchema } from '../../api/expressCheckout/models/PaymentIntentionSchema';
+import { expressCheckoutRenderer } from '../../api/expressCheckout/ExpressCheckoutRenderer';
 
 /**
  * Peinau Checkout Button
- * 
  * @class CheckoutButton
  */
 class CheckoutButton {
 
-	/**
-	 * Render the Checkout Buttons with the specified general properties
-	 * 
-	 * @param {CheckoutButtonRenderSettings} settings Checkout Button Configuration
-	 * @param {Array<string>} elements Array of the DOM element selectors
-	 * @memberof CheckoutButton
-	 */
-	render(settings: CheckoutButtonRenderSettings, elements: Array<string>): void {
-		let $this = this; //CheckoutButton Instance
+    /**
+     * Render the Checkout Buttons with the specified general properties
+     * @param {RenderSettings} settings Checkout Button Configuration
+     * @param {Array<string>} elements Array of the DOM element selectors
+     * @memberof CheckoutButton
+     */
+    public render(settings: any, elements: string[]): void {
+        const $this = this; //CheckoutButton Instance
 
-		let buttonModel = new CheckoutButtonRenderSettings(settings);
-		buttonModel
-			.validate()
-			.then((r) => {
+        const setting_validation = Joi.validate(settings, renderSettingsSchema);
+        if (setting_validation.error) {
+            //console.log(result.error);
+            throw Error(JSON.stringify(setting_validation.error));
+        }
 
-				//Model Validation Success
-				//buttonModel.payment("", 1);
-				elements
-					.forEach(selector => {
+        //Model Validation Success
+        //buttonModel.payment("", 1);
+        elements.forEach(selector => {
 
-						(function () {
-							//Execute The callback in click Event
-							var elm = Utils.DOM.findBySelector(selector);
-							var paymentMethod = elm.getAttribute("data-payment-method");
-							elm.innerHTML = paymentMethod;
+            (() => {
+                //Execute The callback in click Event
+                const elm = utils.dom.findBySelector(selector);
+                const paymentMethod = elm.getAttribute('data-payment-method');
+                elm.innerHTML = paymentMethod;
 
-							Utils.Events.bind(elm, "click", (evt) => {
+                utils.events.bind(elm, 'click', (evt) => {
 
-								elm.innerHTML = "Generando Pago...";
+                    elm.innerHTML = 'Generando Pago...';
+                    settings
+                        .payment(paymentMethod)
+                        .then((intention) => {
 
-								settings
-									.payment(paymentMethod)
-									.then((paymentId) => {
-										
-										elm.innerHTML = paymentMethod;
-										
-										console.log("CALLBACK!!", paymentId)
-										console.log(this);
-									})
-									.catch((error) => {
-										
-										console.log(error);
-									});
+                            const payment_validation = Joi.validate(intention, paymentIntentionSchema, { allowUnknown: true });
+                            if (payment_validation.error) {
+                                //console.log(result.error);
+                                throw Error(JSON.stringify(payment_validation.error));
+                            }
 
-							});
-						})();
+                            elm.innerHTML = paymentMethod;
 
-					});
+                            expressCheckoutRenderer
+                                .payWithConnect(intention)
+                                .then((data) => {
+                                    settings.onSuccess(data);
+                                }, (error) => {
+                                    settings.onError(error);
+                                });
 
-			},
-			(err) => {
-				console.error("Validation Error ", buttonModel.collectErrors()[0].errors);
-			});
-	};
-};
+                        })
+                        .catch((error) => {
+                            //console.log(error);
+                        });
 
+                });
+            })();
 
-const Button = new CheckoutButton();
-export { Button };
+        });
+
+    }
+}
+
+const button = new CheckoutButton();
+export { button };
