@@ -40,11 +40,11 @@ You'll need:
 
 <script>
 
-    Peinau.Components.Button.render({
+    Peinau.components.button.render({
 
         // Set up a getter to create a Payment ID using the payments api, on your server side:
         payment: function() {
-            var defer = new Peinau.Deferred();
+            var defer = new Peinau.sdk.deferred();
             // Make an ajax call to get the Payment ID. This should call your back-end,
             // which should invoke the Peinau Payment Create api to retrieve the Payment ID.
 
@@ -66,9 +66,9 @@ You'll need:
         },
 
         // Pass a function to be called when the gateway (or an internal error) reject the payment
-        onError: function(data) {
+        onError: function(error) {
 
-            console.log('The payment was reject!');
+            console.error('The payment was reject!', error);
 
             /* Go to a error page */
         },
@@ -78,6 +78,8 @@ You'll need:
 
             console.log('The payment was manually canceled!');
             console.log('Payment ID = ', data.paymentID);
+
+            /* Go to a error page?? */
         }
 
          // Pass a function to be called when component send a log info
@@ -86,7 +88,7 @@ You'll need:
             console.log('Message Log = ', data);
         }
 
-    }, '#my-qpay-credit-button');
+    }, ['#my-qpay-credit-button']);
 </script>
 ```
 
