@@ -1,5 +1,6 @@
 #USE EXAMPLE: make push m='QPAY-19: cambios en server' 
 push: 
+	make deploy;
 	git add -A;
 	git commit -m '$(m)';
 	make me-happy;

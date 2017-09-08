@@ -18289,8 +18289,6 @@ var CheckoutButton = function () {
                 //TODO: Localize
                 _this.element.innerHTML = 'Generando Pago...';
                 _this.settings.payment(_this.payment_method).then(function (intention) {
-                    // tslint:disable-next-line:no-debugger
-                    debugger;
                     var payment_validation = Joi.validate(intention, PaymentIntentionSchema_1.paymentIntentionSchema, { allowUnknown: true });
                     if (payment_validation.error) {
                         //console.log(result.error);
@@ -18721,4 +18719,3 @@ exports.Deferred = Deferred;
 
 /***/ })
 /******/ ]);
-//# sourceMappingURL=peinau.js.map
