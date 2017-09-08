@@ -1,6 +1,6 @@
 import * as components from './components';
 import * as utils from './utils';
-import * as sdk from './api/sdk';
+import * as sdk from './sdk';
 
 export {
     components,

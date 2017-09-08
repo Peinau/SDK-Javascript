@@ -18662,8 +18662,8 @@ exports.ext = ext;
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var Deferred_1 = __webpack_require__(339);
-exports.deferred = Deferred_1.Deferred;
+var Promise_1 = __webpack_require__(339);
+exports.Promise = Promise_1.FacadePromise;
 
 /***/ }),
 /* 339 */
@@ -18678,44 +18678,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 Object.defineProperty(exports, "__esModule", { value: true });
 
-var Deferred = function () {
-    function Deferred() {
+var FacadePromise = function () {
+    function FacadePromise(func) {
         var _this = this;
 
-        _classCallCheck(this, Deferred);
+        _classCallCheck(this, FacadePromise);
 
-        this.promise = new Promise(function (resolve, reject) {
+        this.internal_promise = new Promise(function (resolve, reject) {
             _this.res = resolve;
             _this.rej = reject;
         });
+        //Execute the Function
+        func(this.res, this.rej);
     }
 
-    _createClass(Deferred, [{
+    _createClass(FacadePromise, [{
         key: "then",
         value: function then(onfulfilled, onrejected) {
-            return this.promise.then(onfulfilled, onrejected);
+            return this.internal_promise.then(onfulfilled, onrejected);
         }
     }, {
         key: "catch",
         value: function _catch(onRejected) {
-            return this.promise.catch(onRejected);
-        }
-    }, {
-        key: "resolve",
-        value: function resolve(value) {
-            return this.res(value);
-        }
-    }, {
-        key: "reject",
-        value: function reject(reason) {
-            return this.rej(reason);
+            return this.internal_promise.catch(onRejected);
         }
     }]);
 
-    return Deferred;
+    return FacadePromise;
 }();
 
-exports.Deferred = Deferred;
+exports.FacadePromise = FacadePromise;
 
 /***/ })
 /******/ ]);

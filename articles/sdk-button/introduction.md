@@ -117,6 +117,8 @@ new Peinau.components.CheckoutButton({
 }, '#my-qpay-credit-button');
 ```
 
+-----
+
 > **Live Demo**: 
 > If you can't wait for test!: 
 > https://rawgit.com/Peinau/peinau-javascript/master/demo/index.html
