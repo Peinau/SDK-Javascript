@@ -27,31 +27,34 @@ This integration lets you specify all of your payment parameters all at once, to
 
 With this integration:
 - We set up the `payment` method to call our web-server, which then calls the [Peinau REST API](./../rest-api/introduction.md) to **create** a Payment ID.
-- We listen for `onAuthorize`, wich indicates if the payments was success or rejected by the gateway
+- We listen for `onSuccess`, wich indicates that the payment was success by the gateway
+- We listen for `onRejected`, wich indicates that the payment was rejected by the gateway
+- We listen for `onCancel`, wich indicates that the payment was manually canceled by the user
+- We lister for `onLog` for listening any information relevant for the merchant
 
 You'll need:
 - Your **Client ID**.
 - Your **Payment Details** (see [Dev Portal](https://quickpay-connect-checkout-web.azurewebsites.net/#!/docs/api-docs/express-checkout/payments/create-intention) for the expected json structure)
 - An **HTML Container Element** to render the button into
 
-```javascript
+```html
 <button id="my-qpay-credit-button" data-payment-method="QUICKPAY_CREDIT">
 </button>
+```
 
+```javascript
 <script>
-
-    Peinau.components.button.render({
-
+    new Peinau.components.CheckoutButton({
         // Set up a getter to create a Payment ID using the payments api, on your server side:
         payment: function() {
             var defer = new Peinau.sdk.deferred();
-            // Make an ajax call to get the Payment ID. This should call your back-end,
-            // which should invoke the Peinau Payment Create api to retrieve the Payment ID.
+            // Make an ajax call to get the Payment Intention. This should call your back-end,
+            // which should invoke the Peinau Payment Create api to retrieve the Payment Intention.
 
-            // When you have a Payment ID, you need to call the `resolve` method, e.g `resolve(data.paymentID)`
+            // When you have a Payment Intention, you need to call the `resolve` method, e.g `resolve(intention)`
             // Or, if you have an error from your server side, you need to call `reject`, e.g. `reject(err)`
             http.post('/your-api/create-payment')
-                .done(function(data) { defer.resolve(data.paymentID); })
+                .done(function(intention) { defer.resolve(intention); })
                 .fail(function(err)  { defer.reject(err); });            
         },
 
@@ -59,10 +62,10 @@ You'll need:
         onSuccess: function(data) {
 
             console.log('The payment was success!');
-            console.log('Payment ID = ',   data.paymentID);
-            console.log('PayerID = ', data.payerID);
+            console.log('Payment ID = ',   data.id);
+            console.log('Payment Identifier = ',   data.identifier);
 
-            /* Go to a success page */
+            /* Go to a success page or not :P, you decide this */
         },
 
         // Pass a function to be called when the gateway (or an internal error) reject the payment
@@ -70,7 +73,7 @@ You'll need:
 
             console.error('The payment was reject!', error);
 
-            /* Go to a error page */
+            /* Go to a error page or not :P, you decide this */
         },
 
         // Pass a function to be called when the customer cancels the payment
@@ -88,7 +91,7 @@ You'll need:
             console.log('Message Log = ', data);
         }
 
-    }, ['#my-qpay-credit-button']);
+    },'#my-qpay-credit-button');
 </script>
 ```
 
@@ -97,7 +100,7 @@ You'll need:
 You can change the look and feel of the button, using the `style` parameter, and language of the button using `locale` parameter:
 
 ```javascript
-Peinau.CheckoutButton.render({
+new Peinau.components.CheckoutButton({
 
     ...
     // Specify the language displayed on your button
@@ -111,5 +114,5 @@ Peinau.CheckoutButton.render({
         shape:  'pill'    // pill, rect
     }
 
-}, '#my-button-element');
+}, '#my-qpay-credit-button');
 ```

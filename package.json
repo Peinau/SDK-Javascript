@@ -4,10 +4,9 @@
   "description": "Peinau SDK Javascript",
   "main": "dist/peinau.js",
   "scripts": {
-    "build": "webpack",
-    "rebuild": "rimraf dist && webpack",
-    "minimize": "webpack --minimize",
-    "clean": "rimraf dist",
+    "build:dev": "rimraf dist && webpack --env.dev",
+    "build:debug": "rimraf dist && webpack --env.debug",
+    "build:prod": "rimraf dist && webpack --env.dev && webpack --env.production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {

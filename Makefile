@@ -9,9 +9,10 @@ me-happy:
 	git push origin master
 
 compile:
-	npm run rebuild
+	npm run build:dev
+
+debug:
+	npm run build:debug
 
 deploy:
-	npm run rebuild
-	cp dist/peinau.min.js dist/peinau.js
-	webpack -p #minified
+	npm run build:prod

@@ -18221,8 +18221,8 @@ module.exports = function (regExp, replace) {
 
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var button_1 = __webpack_require__(330);
-exports.button = button_1.button;
+var CheckoutButton_1 = __webpack_require__(330);
+exports.CheckoutButton = CheckoutButton_1.CheckoutButton;
 
 /***/ }),
 /* 330 */
@@ -18247,53 +18247,65 @@ var ExpressCheckoutRenderer_1 = __webpack_require__(333);
  */
 
 var CheckoutButton = function () {
-    function CheckoutButton() {
+    /**
+     * Creates an instance of CheckoutButton.
+     * @param {*} settings settings for the configuration
+     * @param {string|Element} selector selector of the element
+     * @memberof CheckoutButton
+     */
+    function CheckoutButton(settings, selector) {
         _classCallCheck(this, CheckoutButton);
+
+        //Model Validation
+        var setting_validation = Joi.validate(settings, RenderSettingsSchema_1.renderSettingsSchema);
+        if (setting_validation.error) {
+            //console.log(result.error);
+            throw Error(JSON.stringify(setting_validation.error));
+        }
+        // Add the element directly or need to find them ??
+        if (selector instanceof Element) {
+            this.element = selector;
+        } else {
+            this.element = index_1.utils.dom.findBySelector(selector);
+        }
+        this.settings = setting_validation.value;
+        this.payment_method = this.element.getAttribute('data-payment-method');
+        this.render();
     }
+    /**
+     * Render the Checkout Buttons with the specified general properties
+     * @memberof CheckoutButton
+     */
+
 
     _createClass(CheckoutButton, [{
         key: "render",
+        value: function render() {
+            var _this = this;
 
-        /**
-         * Render the Checkout Buttons with the specified general properties
-         * @param {RenderSettings} settings Checkout Button Configuration
-         * @param {Array<string>} elements Array of the DOM element selectors
-         * @memberof CheckoutButton
-         */
-        value: function render(settings, elements) {
-            var $this = this; //CheckoutButton Instance
-            var setting_validation = Joi.validate(settings, RenderSettingsSchema_1.renderSettingsSchema);
-            if (setting_validation.error) {
-                //console.log(result.error);
-                throw Error(JSON.stringify(setting_validation.error));
-            }
-            //Model Validation Success
-            //buttonModel.payment("", 1);
-            elements.forEach(function (selector) {
-                (function () {
-                    //Execute The callback in click Event
-                    var elm = index_1.utils.dom.findBySelector(selector);
-                    var paymentMethod = elm.getAttribute('data-payment-method');
-                    elm.innerHTML = paymentMethod;
-                    index_1.utils.events.bind(elm, 'click', function (evt) {
-                        elm.innerHTML = 'Generando Pago...';
-                        settings.payment(paymentMethod).then(function (intention) {
-                            var payment_validation = Joi.validate(intention, PaymentIntentionSchema_1.paymentIntentionSchema, { allowUnknown: true });
-                            if (payment_validation.error) {
-                                //console.log(result.error);
-                                throw Error(JSON.stringify(payment_validation.error));
-                            }
-                            elm.innerHTML = paymentMethod;
-                            ExpressCheckoutRenderer_1.expressCheckoutRenderer.payWithConnect(intention).then(function (data) {
-                                settings.onSuccess(data);
-                            }, function (error) {
-                                settings.onError(error);
-                            });
-                        }).catch(function (error) {
-                            //console.log(error);
-                        });
+            this.element.innerHTML = this.payment_method;
+            //Execute The callback in click Event
+            index_1.utils.events.bind(this.element, 'click', function (evt) {
+                //TODO: Localize
+                _this.element.innerHTML = 'Generando Pago...';
+                _this.settings.payment(_this.payment_method).then(function (intention) {
+                    // tslint:disable-next-line:no-debugger
+                    debugger;
+                    var payment_validation = Joi.validate(intention, PaymentIntentionSchema_1.paymentIntentionSchema, { allowUnknown: true });
+                    if (payment_validation.error) {
+                        //console.log(result.error);
+                        return _this.settings.onError(payment_validation.error);
+                    }
+                    _this.element.innerHTML = _this.payment_method;
+                    ExpressCheckoutRenderer_1.expressCheckoutRenderer.payWithConnect(intention).then(function (data) {
+                        _this.settings.onSuccess(data);
+                    }, function (error) {
+                        _this.settings.onError(error);
                     });
-                })();
+                }).catch(function (error) {
+                    //console.log(error);
+                    _this.settings.onError(error);
+                });
             });
         }
     }]);
@@ -18301,8 +18313,7 @@ var CheckoutButton = function () {
     return CheckoutButton;
 }();
 
-var button = new CheckoutButton();
-exports.button = button;
+exports.CheckoutButton = CheckoutButton;
 
 /***/ }),
 /* 331 */
@@ -18318,7 +18329,8 @@ var renderSettingsSchema = {
     onSuccess: Joi.func().required(),
     onError: Joi.func().required(),
     onCancel: Joi.func().required(),
-    onLog: Joi.func()
+    onLog: Joi.func(),
+    locale: Joi.string().regex(/\w{2}-\w{2}/)
 };
 exports.renderSettingsSchema = renderSettingsSchema;
 
@@ -18392,8 +18404,6 @@ var ExpressCheckoutRenderer = function () {
                     };
                 }();
                 var fn = function fn(e) {
-                    // tslint:disable-next-line:no-debugger
-                    debugger;
                     if (!finaly && e.origin.indexOf(host_to_match.url) === 0) {
                         finaly = true;
                         if (removeEvent) {
@@ -18711,3 +18721,4 @@ exports.Deferred = Deferred;
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=peinau.js.map

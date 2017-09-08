@@ -3,7 +3,7 @@
 <head>
     <title>Demo</title>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script type="text/javascript" src="../dist/peinau.min.js"></script>
+    <script type="text/javascript" src="../dist/peinau.js"></script>
 </head>
 
 <body>
@@ -36,118 +36,120 @@
     };
 
     //Create Button
-    Peinau.components.button.render({
-        payment: function (paymentMethod) {
-            var defer = new Peinau.sdk.deferred();
-
-            // ONLY FOR TESTING PURPOSES!
-            //YOU NEEED TO DO THIS IN THE SERVER SIDE!!!
-            axios({
-                    method: 'POST',
-                    url: "https://api-sso-quickpay.azurewebsites.net/oauth2/v2/token",
-                    data: {
-                        grant_type: 'client_credentials'
-                    },
-                    auth: {
-                        username: '708560986808889039000',
-                        password: 'z65xoHZQ1Qle5R65IO9C7WvvuWAmwEXqFOUqw8LfIWrM'
-                    },
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded"
-                    }
-                })
-                .then(function (response) {
-
-                    axios({
-                            method: 'POST',
-                            url: "http://localhost:8080/payments",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "Authorization": "Bearer " + response.data.access_token
-                            },
-                            data: {
-                                "intent": "sale",
-                                "payer": {
-                                    "payer_info": {
-                                        "email": "jhondoe@quickpay.com",
-                                        "full_name": "Jhon Doe",
-                                        "country": "CL",
-                                        "documentNumber": "107872388",
-                                        "documentType": "RUT"
-                                    },
-                                    "payment_method": paymentMethod,
-                                    "capture_token": "512f415e-d97d-f172-9569-9aca267101f9"
-                                },
-                                "transaction": {
-                                    "reference_id": "TRAN-0000233",
-                                    "description": "Transaction detailed description",
-                                    "soft_descriptor": "Short Description",
-                                    "amount": {
-                                        "currency": "CLP",
-                                        "total": 1000,
-                                        "details": {
-                                            "subtotal": 810,
-                                            "tax": 190,
-                                            "shipping": 0,
-                                            "shipping_discount": 0
-                                        }
-                                    },
-                                    "item_list": {
-                                        "shipping_address": {
-                                            "line1": "General Carol Urzua 3020, Depto 102B",
-                                            "city": "Santiago",
-                                            "country_code": "CL",
-                                            "phone": "+56 9 1234 5674",
-                                            "type": "HOME_OR_WORK",
-                                            "recipient_name": "Jhon Doe"
-                                        },
-                                        "shipping_method": "DIGITAL",
-                                        "items": [{
-                                            "sku": "TRK345-2",
-                                            "name": "Flight 2344",
-                                            "description": "Flight SCL - ONT",
-                                            "quantity": 2,
-                                            "price": 500,
-                                            "tax": 0
-                                        }]
-                                    }
-                                },
-                                "redirect_urls": {
-                                    "return_url": "http://www.google.com/success",
-                                    "cancel_url": "http://www.google.com/cancel"
-                                }
-                            }
-                        })
-                        .then(function (response) {
-                            defer.resolve(response.data);
-                        }, defer.reject);
-
-
-                }, defer.reject);
-
-            return defer;
-        },
-
-        onSuccess: function (data) {
-            //The payment was paid!
-            writeLog("success", data);
-        },
-
-        onError: function (error) {
-            //Payment Reject for some server reason
-            writeLog("error", error);
-        },
-
-        onCancel: function (reason) {
-            //Manual Cancelling
-            writeLog("cancel", reason);
-        }
-
-    }, [
+    var buttons = [
         '#my-webpay-button',
         '#my-qpay-credit-button',
         '#my-qpay-token-button'
-    ]);
+    ].forEach(function (selector) {
+        return new Peinau.components.CheckoutButton({
+            locale: 'es-CL',
+            payment: function (paymentMethod) {
+                var defer = new Peinau.sdk.deferred();
+
+                // ONLY FOR TESTING PURPOSES!
+                //YOU NEEED TO DO THIS IN THE SERVER SIDE!!!
+                axios({
+                        method: 'POST',
+                        url: "https://api-sso-quickpay.azurewebsites.net/oauth2/v2/token",
+                        data: {
+                            grant_type: 'client_credentials'
+                        },
+                        auth: {
+                            username: '708560986808889039000',
+                            password: 'z65xoHZQ1Qle5R65IO9C7WvvuWAmwEXqFOUqw8LfIWrM'
+                        },
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded"
+                        }
+                    })
+                    .then(function (response) {
+
+                        axios({
+                                method: 'POST',
+                                url: "http://localhost:8080/payments",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "Authorization": "Bearer " + response.data.access_token
+                                },
+                                data: {
+                                    "intent": "sale",
+                                    "payer": {
+                                        "payer_info": {
+                                            "email": "jhondoe@quickpay.com",
+                                            "full_name": "Jhon Doe",
+                                            "country": "CL",
+                                            "documentNumber": "107872388",
+                                            "documentType": "RUT"
+                                        },
+                                        "payment_method": paymentMethod,
+                                        "capture_token": "512f415e-d97d-f172-9569-9aca267101f9"
+                                    },
+                                    "transaction": {
+                                        "reference_id": "TRAN-0000233",
+                                        "description": "Transaction detailed description",
+                                        "soft_descriptor": "Short Description",
+                                        "amount": {
+                                            "currency": "CLP",
+                                            "total": 1000,
+                                            "details": {
+                                                "subtotal": 810,
+                                                "tax": 190,
+                                                "shipping": 0,
+                                                "shipping_discount": 0
+                                            }
+                                        },
+                                        "item_list": {
+                                            "shipping_address": {
+                                                "line1": "General Carol Urzua 3020, Depto 102B",
+                                                "city": "Santiago",
+                                                "country_code": "CL",
+                                                "phone": "+56 9 1234 5674",
+                                                "type": "HOME_OR_WORK",
+                                                "recipient_name": "Jhon Doe"
+                                            },
+                                            "shipping_method": "DIGITAL",
+                                            "items": [{
+                                                "sku": "TRK345-2",
+                                                "name": "Flight 2344",
+                                                "description": "Flight SCL - ONT",
+                                                "quantity": 2,
+                                                "price": 500,
+                                                "tax": 0
+                                            }]
+                                        }
+                                    },
+                                    "redirect_urls": {
+                                        "return_url": "http://www.google.com/success",
+                                        "cancel_url": "http://www.google.com/cancel"
+                                    }
+                                }
+                            })
+                            .then(function (response) {
+                                defer.resolve(response.data);
+                            }, defer.reject);
+
+
+                    }, defer.reject);
+
+                return defer;
+            },
+
+            onSuccess: function (data) {
+                //The payment was paid!
+                writeLog("success", data);
+            },
+
+            onError: function (error) {
+                //Payment Reject for some server reason
+                writeLog("error", error);
+            },
+
+            onCancel: function (reason) {
+                //Manual Cancelling
+                writeLog("cancel", reason);
+            }
+        }, selector);
+    });
 </script>
 
 </html>
