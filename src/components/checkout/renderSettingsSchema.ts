@@ -1,12 +1,15 @@
-import * as Joi from 'joi';
+import { ValidationBaseSchema } from '../../sdk/validation/ValidationBaseSchema';
 
-const renderSettingsSchema = {
-    payment: Joi.func().required(),
-    onSuccess: Joi.func().required(),
-    onError: Joi.func().required(),
-    onCancel: Joi.func().required(),
-    onLog: Joi.func(),
-    locale: Joi.string().regex(/\w{2}-\w{2}/)
-};
-
+const renderSettingsSchema = new ValidationBaseSchema({
+    type: 'object',
+    properties: {
+        payment: { isfunction: true },
+        onSuccess: { isfunction: true },
+        onError: { isfunction: true },
+        onCancel: { isfunction: true },
+        onLog: { isfunction: true },
+        locale: { type: 'string' }
+    },
+    required: ['payment', 'onSuccess', 'onError', 'onCancel']
+});
 export { renderSettingsSchema };

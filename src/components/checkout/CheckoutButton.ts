@@ -1,5 +1,4 @@
 import { renderSettingsSchema } from './RenderSettingsSchema';
-import * as Joi from 'joi';
 import { utils } from '../../index';
 import { paymentIntentionSchema } from '../../api/expressCheckout/models/PaymentIntentionSchema';
 import { expressCheckoutRenderer } from '../../api/expressCheckout/ExpressCheckoutRenderer';
@@ -40,10 +39,9 @@ class CheckoutButton {
     constructor(settings: any, selector: string | Element) {
 
         //Model Validation
-        const setting_validation = Joi.validate(settings, renderSettingsSchema);
-        if (setting_validation.error) {
+        if (!renderSettingsSchema.isValid(settings)) {
             //console.log(result.error);
-            throw Error(JSON.stringify(setting_validation.error));
+            throw Error(JSON.stringify(renderSettingsSchema.errors));
         }
 
         // Add the element directly or need to find them ??
@@ -53,7 +51,7 @@ class CheckoutButton {
             this.element = utils.dom.findBySelector(selector);
         }
 
-        this.settings = setting_validation.value;
+        this.settings = settings;
         this.payment_method = this.element.getAttribute('data-payment-method');
 
         this.render();
@@ -74,10 +72,10 @@ class CheckoutButton {
                 .payment(this.payment_method)
                 .then((intention) => {
 
-                    const payment_validation = Joi.validate(intention, paymentIntentionSchema, { allowUnknown: true });
-                    if (payment_validation.error) {
+                    //Model Validation
+                    if (!paymentIntentionSchema.isValid(intention)) {
                         //console.log(result.error);
-                        return this.settings.onError(payment_validation.error);
+                        throw Error(JSON.stringify(paymentIntentionSchema.errors));
                     }
 
                     this.element.innerHTML = this.payment_method;

@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const WebpackBundleSizeAnalyzerPlugin = require('webpack-bundle-size-analyzer').WebpackBundleSizeAnalyzerPlugin;
 
 module.exports = function (env) {
 
@@ -7,7 +8,10 @@ module.exports = function (env) {
 
         if (env.debug) {
             return {
-                devtool: "source-map"
+                devtool: "source-map",
+                plugins: [
+                    new WebpackBundleSizeAnalyzerPlugin('./dist/plain-report.txt')
+                ]
             };
         }
 
@@ -20,7 +24,8 @@ module.exports = function (env) {
                     new webpack.optimize.UglifyJsPlugin({
                         parallel: true,
                         minimize: true
-                    })
+                    }),
+                    new WebpackBundleSizeAnalyzerPlugin('./dist/plain-report.txt')
                 ]
             };
         }
