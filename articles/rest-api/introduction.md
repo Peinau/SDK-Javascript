@@ -136,7 +136,7 @@ The way this works is:
 
                // Call your server side to get the Payment ID from step 3, then pass it to the resolve callback (you can use Peinau http based on Axios Library)
                Peinau.sdk.http.post('https://www.my-Peinau-store.com/my-api/payment-create')
-                   .done(function(data) {
+                   .then(function(data) {
                        resolve(data.paymentID);
                    });
            });

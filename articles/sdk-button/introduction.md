@@ -47,15 +47,17 @@ You'll need:
     new Peinau.components.CheckoutButton({
         // Set up a getter to create a Payment ID using the payments api, on your server side:
         payment: function() {
-            var defer = new Peinau.sdk.deferred();
-            // Make an ajax call to get the Payment Intention (you can use Peinau http based on Axios Library). This should call your back-end,
-            // which should invoke the Peinau Payment Create api to retrieve the Payment Intention.
+            return new Peinau.Promise(function(resolve, reject) {
+                // Make an ajax call to get the Payment Intention (you can use Peinau http based on Axios Library). This should call your back-end,
+                // which should invoke the Peinau Payment Create api to retrieve the Payment Intention.
 
-            // When you have a Payment Intention, you need to call the `resolve` method, e.g `resolve(intention)`
-            // Or, if you have an error from your server side, you need to call `reject`, e.g. `reject(err)`
-            Peinau.sdk.http.post('/your-api/create-payment')
-                .done(function(intention) { defer.resolve(intention); })
-                .fail(function(err)  { defer.reject(err); });            
+                // When you have a Payment Intention, you need to call the `resolve` method, e.g `resolve(intention)`
+                // Or, if you have an error from your server side, you need to call `reject`, e.g. `reject(err)`
+                Peinau.sdk.http.post('/your-api/create-payment')
+                    .then(function(intention) { 
+                        resolve(intention); 
+                    });            
+            });
         },
 
         // Pass a function to be called when the customer approves the payment
