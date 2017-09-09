@@ -53,7 +53,8 @@ You'll need:
 
             // When you have a Payment Intention, you need to call the `resolve` method, e.g `resolve(intention)`
             // Or, if you have an error from your server side, you need to call `reject`, e.g. `reject(err)`
-            http.post('/your-api/create-payment')
+            //(you can use Peinau http based on Axios Library)
+            Peinau.sdk.http.post('/your-api/create-payment')
                 .done(function(intention) { defer.resolve(intention); })
                 .fail(function(err)  { defer.reject(err); });            
         },

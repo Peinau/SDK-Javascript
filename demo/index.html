@@ -2,7 +2,6 @@
 
 <head>
     <title>Demo</title>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script type="text/javascript" src="../dist/peinau.js"></script>
 </head>
 
@@ -45,10 +44,7 @@
             locale: 'es-CL',
             payment: function (paymentMethod) {
                 return new Peinau.sdk.Promise(function (resolve, reject) {
-                    // ONLY FOR TESTING PURPOSES!
-                    // YOU NEEED TO DO THIS IN THE SERVER SIDE!!!
-                    axios({
-                            method: 'POST',
+                    Peinau.sdk.http.post({
                             url: "https://api-sso-quickpay.azurewebsites.net/oauth2/v2/token",
                             data: {
                                 grant_type: 'client_credentials'
@@ -63,8 +59,7 @@
                         })
                         .then(function (response) {
 
-                            axios({
-                                    method: 'POST',
+                            Peinau.sdk.http.post({
                                     url: "https://api-checkout-quickpay.azurewebsites.net/payments",
                                     headers: {
                                         "Content-Type": "application/json",
