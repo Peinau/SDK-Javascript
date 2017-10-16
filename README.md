@@ -54,4 +54,4 @@ To enable output of additional debugging messages to the console, set the `data-
    ```html
    <script src="https://www.peinau.com/api/peinau.v1.js" data-version-1 data-log-level="info"></script>
    ```
-   [Volver al menú anterior](Pasarela-de-pagos.md)
+   [Volver al menú anterior](Articulos/Pasarela-de-pagos.md)
