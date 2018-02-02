@@ -59,7 +59,7 @@ export class ValidationBaseSchema extends Validator {
     /**
      * Run the validation process and return if the validation pass OK or fail
      * @param {*} instance Model to validate
-     * @returns {boolean} 
+     * @returns {boolean}
      * @memberof ValidationBaseSchema
      */
     public isValid(instance: any): boolean {

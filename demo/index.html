@@ -43,6 +43,7 @@
         return new Peinau.components.CheckoutButton({
             locale: 'es-CL',
             payment: function (paymentMethod) {
+             
                 return new Peinau.sdk.Promise(function (resolve, reject) {
                     Peinau.sdk.http.post({
                             url: "https://api-sso-quickpay.azurewebsites.net/oauth2/v2/token",
