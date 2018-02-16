@@ -8,7 +8,7 @@
 
 #### Create a Peinau App
 
-1. Go to https://quickpay-connect-checkout-web.azurewebsites.net/#!/app/applications
+1. Go to http://portal.sandbox.connect.fif.tech
 2. Log in to the site with your Peinau credentials
 3. Follow the instructions to create a new app
 4. Make a note of your **Client ID** and **Client Secret** for both **Sandbox** and **Production**.
@@ -34,7 +34,7 @@ With this integration:
 
 You'll need:
 - Your **Client ID**.
-- Your **Payment Details** (see [Dev Portal](https://quickpay-connect-checkout-web.azurewebsites.net/#!/docs/api-docs/express-checkout/payments/create-intention) for the expected json structure)
+- Your **Payment Details** (see [Dev Portal](http://portal.sandbox.connect.fif.tech/#!/docs/api-docs/express-checkout/demo/pay-with-quickpay-token) for the expected json structure)
 - An **HTML Container Element** to render the button into
 
 ```html
